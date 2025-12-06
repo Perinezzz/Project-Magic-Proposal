@@ -2,6 +2,7 @@ import React from 'react';
 import { MapPin, Calendar } from 'lucide-react';
 import { TravelProposal } from '../../types';
 import { ImageUpload } from '../ui/ImageUpload';
+import { LocationAutocomplete } from '../ui/LocationAutocomplete';
 
 interface DestinationSectionProps {
   data: TravelProposal['destination'];
@@ -17,12 +18,12 @@ export const DestinationSection: React.FC<DestinationSectionProps> = ({ data, on
           <MapPin className="inline-block w-4 h-4 mr-2" />
           Nome do Destino *
         </label>
-        <input
-          type="text"
+        <LocationAutocomplete
           value={data.name}
-          onChange={(e) => onChange({ ...data, name: e.target.value })}
+          onChange={(name) => onChange({ ...data, name })}
           placeholder="ex: Maldivas, Paris, Fernando de Noronha..."
           className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-lg"
+          type="all"
         />
       </div>
 

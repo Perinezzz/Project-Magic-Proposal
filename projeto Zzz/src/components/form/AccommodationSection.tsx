@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Hotel, Star, MapPin, Plus, X } from 'lucide-react';
 import { TravelProposal } from '../../types';
 import { ImageUpload } from '../ui/ImageUpload';
+import { LocationAutocomplete } from '../ui/LocationAutocomplete';
 
 interface AccommodationSectionProps {
   data: TravelProposal['accommodation'];
@@ -65,12 +66,12 @@ export const AccommodationSection: React.FC<AccommodationSectionProps> = ({ data
             <MapPin className="inline-block w-4 h-4 mr-2" />
             Localização
           </label>
-          <input
-            type="text"
+          <LocationAutocomplete
             value={data.location}
-            onChange={(e) => onChange({ ...data, location: e.target.value })}
+            onChange={(location) => onChange({ ...data, location })}
             placeholder="ex: Baa Atoll, Maldivas"
             className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
+            type="all"
           />
         </div>
       </div>

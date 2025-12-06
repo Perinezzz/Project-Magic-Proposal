@@ -1,6 +1,7 @@
 import React from 'react';
 import { Plane, Clock, MapPin } from 'lucide-react';
 import { TravelProposal, Flight } from '../../types';
+import { LocationAutocomplete } from '../ui/LocationAutocomplete';
 
 interface FlightsSectionProps {
   data: TravelProposal['flights'];
@@ -52,12 +53,14 @@ const FlightForm: React.FC<{
             Origem
           </label>
           <div className="flex gap-2">
-            <input
-              type="text"
+            <LocationAutocomplete
               value={flight.origin}
-              onChange={(e) => onChange({ ...flight, origin: e.target.value })}
+              onChange={(origin) => onChange({ ...flight, origin })}
+              onCodeChange={(originCode) => onChange({ ...flight, originCode })}
               placeholder="São Paulo"
               className="flex-1 px-3 py-2 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-sm"
+              showCode={true}
+              type="all"
             />
             <input
               type="text"
@@ -75,12 +78,14 @@ const FlightForm: React.FC<{
             Destino
           </label>
           <div className="flex gap-2">
-            <input
-              type="text"
+            <LocationAutocomplete
               value={flight.destination}
-              onChange={(e) => onChange({ ...flight, destination: e.target.value })}
+              onChange={(destination) => onChange({ ...flight, destination })}
+              onCodeChange={(destinationCode) => onChange({ ...flight, destinationCode })}
               placeholder="Miami"
               className="flex-1 px-3 py-2 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-sm"
+              showCode={true}
+              type="all"
             />
             <input
               type="text"
