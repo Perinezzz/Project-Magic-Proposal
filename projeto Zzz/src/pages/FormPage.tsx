@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { 
   Building2, MapPin, Globe, Plane, Hotel, 
@@ -6,6 +6,7 @@ import {
 } from 'lucide-react';
 import { TravelProposal, createEmptyProposal } from '../types';
 import { saveProposal, generateShareableLink, applyTheme } from '../services/storage';
+import { generateDestinationDescription } from '../services/aiService';
 import { Accordion } from '../components/ui/Accordion';
 import { SuccessModal } from '../components/ui/SuccessModal';
 
@@ -36,9 +37,43 @@ export const FormPage: React.FC = () => {
   const [activeSection, setActiveSection] = useState('agency');
   const [showSuccess, setShowSuccess] = useState(false);
   const [savedProposal, setSavedProposal] = useState<TravelProposal | null>(null);
+  const [isGeneratingDescription, setIsGeneratingDescription] = useState(false);
+  const previousDestination = useRef<string>('');
+
+  // Detecta mudança de destino e gera descrição com IA
+  useEffect(() => {
+    const currentDestination = formData.destination.name;
+    
+    // Só gera se o destino mudou, tem pelo menos 3 caracteres, e a descrição está vazia
+    if (
+      currentDestination !== previousDestination.current && 
+      currentDestination.length >= 3 &&
+      !formData.about.description
+    ) {
+      previousDestination.current = currentDestination;
+      
+      // Debounce de 1 segundo para evitar chamadas excessivas
+      const timeoutId = setTimeout(async () => {
+        setIsGeneratingDescription(true);
+        try {
+          const description = await generateDestinationDescription(currentDestination);
+          setFormData(prev => ({
+            ...prev,
+            about: { ...prev.about, description }
+          }));
+        } catch (error) {
+          console.error('Erro ao gerar descrição:', error);
+        } finally {
+          setIsGeneratingDescription(false);
+        }
+      }, 1000);
+      
+      return () => clearTimeout(timeoutId);
+    }
+  }, [formData.destination.name, formData.about.description]);
 
   // Apply initial theme
-  React.useEffect(() => {
+  useEffect(() => {
     applyTheme(formData.agency.theme);
   }, []);
 
@@ -146,6 +181,7 @@ export const FormPage: React.FC = () => {
           <AboutSection
             data={formData.about}
             onChange={(about) => setFormData({ ...formData, about })}
+            isLoadingAI={isGeneratingDescription}
           />
           <FlightsSection
             data={formData.flights}
