@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Globe, CloudSun, Languages, Coins, Sparkles, Plus, X, Image as ImageIcon } from 'lucide-react';
+import { Globe, CloudSun, Languages, Coins, Sparkles, Plus, X, Image as ImageIcon, Wand2 } from 'lucide-react';
 import { TravelProposal } from '../../types';
 import { ImageUpload } from '../ui/ImageUpload';
 
 interface AboutSectionProps {
   data: TravelProposal['about'];
   onChange: (data: TravelProposal['about']) => void;
+  isLoadingAI?: boolean;
 }
 
-export const AboutSection: React.FC<AboutSectionProps> = ({ data, onChange }) => {
+export const AboutSection: React.FC<AboutSectionProps> = ({ data, onChange, isLoadingAI = false }) => {
   const [newHighlight, setNewHighlight] = useState('');
 
   const addHighlight = () => {
@@ -46,17 +47,44 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ data, onChange }) =>
         <label className="block text-sm font-medium text-gray-700 mb-2">
           <Globe className="inline-block w-4 h-4 mr-2" />
           Descrição do Destino *
+          {isLoadingAI && (
+            <motion.span
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="ml-2 inline-flex items-center gap-1 text-primary"
+            >
+              <Wand2 className="w-4 h-4 animate-pulse" />
+              <span className="text-xs">IA gerando...</span>
+            </motion.span>
+          )}
         </label>
-        <textarea
-          value={data.description}
-          onChange={(e) => onChange({ ...data, description: e.target.value })}
-          placeholder="Descreva a magia deste destino... O que torna este lugar especial? Quais experiências únicas aguardam?"
-          rows={4}
-          maxLength={500}
-          className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all resize-none"
-        />
+        <div className="relative">
+          <textarea
+            value={data.description}
+            onChange={(e) => onChange({ ...data, description: e.target.value })}
+            placeholder="Descreva a magia deste destino... O que torna este lugar especial? Quais experiências únicas aguardam?"
+            rows={4}
+            maxLength={500}
+            className={`w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all resize-none ${isLoadingAI ? 'bg-gradient-to-r from-purple-50 to-blue-50 animate-pulse' : ''}`}
+            disabled={isLoadingAI}
+          />
+          {isLoadingAI && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              className="absolute inset-0 flex items-center justify-center bg-white/50 rounded-xl"
+            >
+              <div className="flex items-center gap-2 px-4 py-2 bg-white rounded-lg shadow-lg border border-primary/20">
+                <Wand2 className="w-5 h-5 text-primary animate-spin" />
+                <span className="text-sm font-medium text-gray-700">Gerando com IA...</span>
+              </div>
+            </motion.div>
+          )}
+        </div>
         <div className="flex justify-between mt-1">
-          <span className="text-xs text-gray-400">Mínimo: 100 caracteres</span>
+          <span className="text-xs text-gray-400">
+            {isLoadingAI ? '✨ A IA está escrevendo para você...' : 'Mínimo: 100 caracteres'}
+          </span>
           <span className={`text-xs ${data.description.length < 100 ? 'text-orange-500' : 'text-gray-400'}`}>
             {data.description.length}/500
           </span>
