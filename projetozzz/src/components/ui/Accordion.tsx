@@ -50,13 +50,19 @@ export const Accordion: React.FC<AccordionProps> = ({
                                 <motion.div
                                     animate={{ scale: isActive ? 1.1 : 1 }}
                                     className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all duration-300 ${section.isComplete
-                                            ? 'bg-green-100 text-green-600'
+                                            ? 'bg-green-100 dark:bg-green-900 text-green-600'
                                             : isActive
                                                 ? 'bg-gradient-to-br from-primary to-accent text-white'
-                                                : 'bg-gray-100 text-gray-400'
+                                                : 'bg-gray-100 dark:bg-gray-700 text-gray-600'
                                         }`}
                                 >
-                                    {section.isComplete ? <Check size={20} /> : section.icon}
+                                    {section.isComplete ? (
+                                        <Check size={20} className="text-green-700 dark:text-green-300" strokeWidth={3} />
+                                    ) : isActive ? (
+                                        <div className="text-white">{React.cloneElement(section.icon as React.ReactElement, { strokeWidth: 2.5 })}</div>
+                                    ) : (
+                                        <div className="text-gray-600 dark:text-gray-400">{React.cloneElement(section.icon as React.ReactElement, { strokeWidth: 2.5 })}</div>
+                                    )}
                                 </motion.div>
                                 <div>
                                     <span className="text-xs text-gray-400 font-medium">

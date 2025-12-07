@@ -35,7 +35,7 @@ const SECTIONS = [
   {
     id: "agency",
     title: "Identidade da Agência",
-    icon: <Building2 size={20} />,
+    icon: <Building2 size={20} />, 
   },
   { id: "destination", title: "Destino", icon: <MapPin size={20} /> },
   { id: "about", title: "Sobre o Destino", icon: <Globe size={20} /> },

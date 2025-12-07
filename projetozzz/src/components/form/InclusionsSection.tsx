@@ -113,6 +113,8 @@ export const InclusionsSection: React.FC<InclusionsSectionProps> = ({ data, onCh
                 🚗 Categoria do Veículo
               </label>
               <select
+                id="car-category"
+                name="car-category"
                 value={data.carCategory || ''}
                 onChange={(e) => onChange({ ...data, carCategory: e.target.value })}
                 className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all bg-white"
@@ -139,6 +141,8 @@ export const InclusionsSection: React.FC<InclusionsSectionProps> = ({ data, onCh
         <div className="flex gap-2 mb-3">
           <input
             type="text"
+            id="custom-item-input"
+            name="custom-item-input"
             value={newItem}
             onChange={(e) => setNewItem(e.target.value)}
             onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addCustomItem())}

@@ -265,3 +265,29 @@ export const createEmptyProposal = (): Omit<TravelProposal, 'id' | 'createdAt'> 
         email: '',
     },
 });
+
+/**
+ * Formata um número como moeda brasileira (R$)
+ */
+export const formatCurrency = (value: number): string => {
+    return new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL',
+    }).format(value);
+};
+
+/**
+ * Formata uma data em formato legível (DD de MMMM de YYYY)
+ */
+export const formatDate = (dateString: string): string => {
+    try {
+        const date = new Date(dateString);
+        return new Intl.DateTimeFormat('pt-BR', {
+            day: '2-digit',
+            month: 'long',
+            year: 'numeric',
+        }).format(date);
+    } catch {
+        return dateString;
+    }
+};

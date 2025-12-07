@@ -9,6 +9,7 @@ interface FlightsSectionProps {
   onChange: (data: TravelProposal["flights"]) => void;
 }
 
+// FlightForm moved outside
 const FlightForm: React.FC<{
   title: string;
   icon: React.ReactNode;
@@ -41,6 +42,8 @@ const FlightForm: React.FC<{
           </label>
           <input
             type="time"
+            id="flight-time"
+            name="flight-time"
             value={flight.time}
             onChange={(e) => onChange({ ...flight, time: e.target.value })}
             className="w-full px-3 py-2 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-sm"
@@ -65,7 +68,6 @@ const FlightForm: React.FC<{
                   onChange({ ...flight, origin });
                 }
               }}
-              onCodeChange={(originCode) => onChange({ ...flight, originCode })}
               placeholder="São Paulo"
               className="flex-1 px-3 py-2 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-sm"
               showCode={true}
@@ -73,6 +75,8 @@ const FlightForm: React.FC<{
             />
             <input
               type="text"
+              id="flight-origin-code"
+              name="flight-origin-code"
               value={flight.originCode}
               onChange={(e) =>
                 onChange({
@@ -101,9 +105,6 @@ const FlightForm: React.FC<{
                   onChange({ ...flight, destination });
                 }
               }}
-              onCodeChange={(destinationCode) =>
-                onChange({ ...flight, destinationCode })
-              }
               placeholder="Miami"
               className="flex-1 px-3 py-2 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-sm"
               showCode={true}
@@ -111,6 +112,8 @@ const FlightForm: React.FC<{
             />
             <input
               type="text"
+              id="flight-destination-code"
+              name="flight-destination-code"
               value={flight.destinationCode}
               onChange={(e) =>
                 onChange({
@@ -133,6 +136,8 @@ const FlightForm: React.FC<{
           </label>
           <input
             type="text"
+            id="flight-duration"
+            name="flight-duration"
             value={flight.duration}
             onChange={(e) => onChange({ ...flight, duration: e.target.value })}
             placeholder="ex: 10h 30min"
@@ -144,6 +149,8 @@ const FlightForm: React.FC<{
             Paradas
           </label>
           <select
+            id="flight-stops"
+            name="flight-stops"
             value={flight.stops}
             onChange={(e) => onChange({ ...flight, stops: e.target.value })}
             className="w-full px-3 py-2 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-sm bg-white"

@@ -28,6 +28,8 @@ export const InvestmentSection: React.FC<InvestmentSectionProps> = ({ data, onCh
         <div className="relative">
           <input
             type="text"
+            id="investment-price"
+            name="investment-price"
             value={displayPrice}
             onChange={handlePriceChange}
             placeholder="R$ 0,00"
@@ -84,6 +86,8 @@ export const InvestmentSection: React.FC<InvestmentSectionProps> = ({ data, onCh
           Condições Especiais
         </label>
         <textarea
+          id="special-conditions"
+          name="special-conditions"
           value={data.conditions}
           onChange={(e) => onChange({ ...data, conditions: e.target.value })}
           placeholder="ex: Válido para reservas até 15/12. Sujeito a disponibilidade. Não reembolsável após confirmação..."
@@ -99,6 +103,8 @@ export const InvestmentSection: React.FC<InvestmentSectionProps> = ({ data, onCh
           Parcelamento
         </label>
         <select
+          id="installments"
+          name="installments"
           value={data.installments}
           onChange={(e) => onChange({ ...data, installments: e.target.value })}
           className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all bg-white"
@@ -117,6 +123,8 @@ export const InvestmentSection: React.FC<InvestmentSectionProps> = ({ data, onCh
 
         {data.installments === 'Entrada + parcelas' && (
           <textarea
+            id="custom-installments"
+            name="custom-installments"
             placeholder="Descreva as condições de parcelamento personalizadas..."
             className="w-full mt-3 px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all resize-none"
             rows={2}

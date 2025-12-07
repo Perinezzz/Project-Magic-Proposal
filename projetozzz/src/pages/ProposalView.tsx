@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import { TravelProposal } from '../types';
 import { getProposal, applyTheme, formatDate, formatCurrency, calculateDuration } from '../services/storage';
+import { FloatingExportButton } from '../components/ui/ExportMenu';
 
 export const ProposalView: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -634,6 +635,9 @@ export const ProposalView: React.FC = () => {
           </p>
         </div>
       </footer>
+
+      {/* Export Button */}
+      <FloatingExportButton proposal={proposal} />
     </div>
   );
 };

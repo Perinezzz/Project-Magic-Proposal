@@ -1,14 +1,14 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  --color-primary: #0052CC;
-  --color-primary-light: #4C9AFF;
-  --color-accent: #FFC107;
-  --color-accent-light: #FFE082;
+  --color-primary: #0052cc;
+  --color-primary-light: #4c9aff;
+  --color-accent: #ffc107;
+  --color-accent-light: #ffe082;
 }
 
 * {
@@ -19,52 +19,471 @@ html {
   scroll-behavior: smooth;
 }
 
+/* ========================================
+   LIGHT MODE - REFINED & BEAUTIFUL
+   ======================================== */
+
 body {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: "Inter", system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  background: linear-gradient(
+    135deg,
+    #ececf1 0%,
+    #e8e8ee 20%,
+    #e6e4eb 40%,
+    #ede6ed 60%,
+    #f0ebf0 80%,
+    #ececf1 100%
+  );
   min-height: 100vh;
+  transition: background 0.4s ease, color 0.4s ease;
+  color: #3d4a61;
 }
 
-/* Custom scrollbar */
+html {
+  color-scheme: light;
+}
+
+/* Light mode - Glass effect */
+.glass {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.04);
+}
+
+/* Light mode - Input styling */
+input,
+textarea,
+select {
+  background: rgba(255, 255, 255, 0.8) !important;
+  color: #3d4a61 !important;
+  border-color: rgba(147, 160, 176, 0.25) !important;
+  transition: all 0.3s ease !important;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border-color: rgba(0, 82, 204, 0.35) !important;
+  box-shadow: 0 0 0 3px rgba(0, 82, 204, 0.06) !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: rgba(60, 80, 110, 0.5) !important;
+}
+
+label {
+  color: #3d4a61 !important;
+  font-weight: 500;
+}
+
+/* Light mode - Typography */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: #1a2332 !important;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+}
+
+p,
+span,
+div,
+li,
+a {
+  color: inherit;
+}
+
+.text-gray-900,
+.text-gray-800,
+.text-gray-700 {
+  color: #1a2332 !important;
+}
+
+.text-gray-600,
+.text-gray-500 {
+  color: #5a7088 !important;
+}
+
+.text-gray-400,
+.text-gray-300 {
+  color: #9db0b0 !important;
+}
+
+/* Light mode - Background colors */
+.bg-gray-50,
+.bg-gray-100,
+.bg-gray-200 {
+  background-color: rgba(240, 244, 248, 0.6) !important;
+}
+
+.bg-white {
+  background-color: rgba(255, 255, 255, 0.7) !important;
+  border-color: rgba(147, 160, 176, 0.12) !important;
+  box-shadow: 0 4px 15px rgba(31, 38, 135, 0.03);
+}
+
+.bg-gray-900 {
+  background-color: rgba(26, 35, 50, 0.95) !important;
+}
+
+/* Light mode - Borders */
+.border-gray-100,
+.border-gray-200,
+.border-gray-300 {
+  border-color: rgba(147, 160, 176, 0.2) !important;
+}
+
+.border-gray-700,
+.border-gray-800 {
+  border-color: rgba(93, 112, 136, 0.3) !important;
+}
+
+/* Light mode - Cards and Containers */
+[class*="rounded-2xl"],
+[class*="rounded-xl"],
+[class*="rounded-lg"] {
+  background-color: inherit;
+  border-color: rgba(147, 160, 176, 0.15);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[class*="rounded-2xl"]:hover,
+[class*="rounded-xl"]:hover,
+[class*="rounded-lg"]:hover {
+  border-color: rgba(0, 82, 204, 0.2);
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 12px 24px rgba(0, 82, 204, 0.08);
+}
+
+/* Light mode - Icons */
+svg {
+  color: inherit;
+}
+
+/* Light mode - Dropdown/Autocomplete */
+[class*="absolute"][class*="bg-white"] {
+  background-color: rgba(255, 255, 255, 0.92) !important;
+  border-color: rgba(147, 160, 176, 0.15) !important;
+  box-shadow: 0 10px 40px rgba(31, 38, 135, 0.08) !important;
+  backdrop-filter: blur(10px);
+}
+
+[class*="hover:bg-gray-100"]:hover {
+  background-color: rgba(240, 244, 248, 0.7) !important;
+  transition: background-color 0.2s ease;
+}
+
+/* Light mode - Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.05);
+  background: rgba(240, 244, 248, 0.5);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(93, 112, 136, 0.3);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(93, 112, 136, 0.5);
 }
 
-/* Glassmorphism utility */
-.glass {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+/* Light mode - Ring colors */
+.ring-gray-200,
+.focus:ring-gray-200 {
+  --tw-ring-color: rgba(0, 82, 204, 0.1) !important;
 }
 
-.glass-dark {
-  background: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+.ring-primary {
+  --tw-ring-color: rgba(0, 82, 204, 0.15) !important;
 }
+
+/* Light mode - Shadows */
+.shadow-lg,
+.shadow-xl,
+.shadow-2xl {
+  --tw-shadow-color: rgba(31, 38, 135, 0.06);
+  box-shadow: 0 20px 25px -5px var(--tw-shadow-color) !important;
+}
+
+.shadow-sm {
+  box-shadow: 0 1px 2px 0 rgba(31, 38, 135, 0.03) !important;
+}
+
+/* Light mode - Focus states */
+*:focus-visible {
+  outline: 2px solid rgba(0, 82, 204, 0.4);
+  outline-offset: 2px;
+}
+
+/* Light mode - Shimmer animation */
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+  background: linear-gradient(
+    90deg,
+    rgba(147, 160, 176, 0.1) 0%,
+    rgba(147, 160, 176, 0.2) 50%,
+    rgba(147, 160, 176, 0.1) 100%
+  );
+  background-size: 1000px 100%;
+}
+
+/* Light mode - Transitions */
+* {
+  transition-property: color, background-color, border-color, box-shadow;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.no-transition {
+  transition: none !important;
+}
+
+/* ========================================
+   DARK MODE - ENHANCED
+   ======================================== */
+
+html.dark body {
+  background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 30%, #1a1a3e 60%, #0f0f23 100%);
+  color: #e2e8f0;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+/* Dark mode - Glass effect */
+html.dark .glass {
+  background: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(148, 163, 184, 0.1);
+}
+
+/* Dark mode - Input styling */
+html.dark input,
+html.dark textarea,
+html.dark select {
+  background: rgba(30, 41, 59, 0.8) !important;
+  color: #f1f5f9 !important;
+  border-color: rgba(148, 163, 184, 0.2) !important;
+  transition: all 0.2s ease !important;
+}
+
+html.dark input:focus,
+html.dark textarea:focus,
+html.dark select:focus {
+  background: rgba(30, 41, 59, 0.95) !important;
+  border-color: rgba(100, 200, 255, 0.4) !important;
+  box-shadow: 0 0 0 3px rgba(100, 200, 255, 0.1) !important;
+}
+
+html.dark input::placeholder,
+html.dark textarea::placeholder {
+  color: rgba(203, 213, 225, 0.5) !important;
+}
+
+html.dark label {
+  color: #cbd5e1 !important;
+}
+
+/* Dark mode - Typography */
+html.dark h1,
+html.dark h2,
+html.dark h3,
+html.dark h4,
+html.dark h5,
+html.dark h6 {
+  color: #f8fafc !important;
+  font-weight: 600;
+}
+
+html.dark p,
+html.dark span,
+html.dark div,
+html.dark li,
+html.dark a {
+  color: inherit;
+}
+
+html.dark .text-gray-900,
+html.dark .text-gray-800,
+html.dark .text-gray-700 {
+  color: #f1f5f9 !important;
+}
+
+html.dark .text-gray-600,
+html.dark .text-gray-500,
+html.dark .text-gray-400 {
+  color: #94a3b8 !important;
+}
+
+html.dark .text-gray-300 {
+  color: #cbd5e1 !important;
+}
+
+/* Dark mode - Backgrounds */
+html.dark .bg-gray-200,
+html.dark .bg-gray-100,
+html.dark .bg-gray-50 {
+  background-color: rgba(51, 65, 85, 0.6) !important;
+}
+
+html.dark .bg-white {
+  background-color: rgba(30, 41, 59, 0.8) !important;
+  border-color: rgba(148, 163, 184, 0.1) !important;
+}
+
+html.dark .bg-gray-900 {
+  background-color: rgba(15, 23, 42, 0.6) !important;
+}
+
+/* Dark mode - Borders */
+html.dark .border-gray-200,
+html.dark .border-gray-300,
+html.dark .border-gray-100 {
+  border-color: rgba(148, 163, 184, 0.15) !important;
+}
+
+html.dark .border-gray-700,
+html.dark .border-gray-800 {
+  border-color: rgba(148, 163, 184, 0.25) !important;
+}
+
+/* Dark mode - Cards */
+html.dark [class*="rounded-2xl"],
+html.dark [class*="rounded-xl"],
+html.dark [class*="rounded-lg"] {
+  background-color: inherit;
+  border-color: rgba(148, 163, 184, 0.1);
+  transition: all 0.3s ease;
+}
+
+html.dark [class*="rounded-2xl"]:hover,
+html.dark [class*="rounded-xl"]:hover,
+html.dark [class*="rounded-lg"]:hover {
+  border-color: rgba(148, 163, 184, 0.2);
+  background-color: rgba(51, 65, 85, 0.3);
+}
+
+/* Dark mode - Icons */
+html.dark svg {
+  color: inherit;
+}
+
+/* Dark mode - Dropdown */
+html.dark [class*="absolute"][class*="bg-white"] {
+  background-color: rgba(30, 41, 59, 0.95) !important;
+  border-color: rgba(148, 163, 184, 0.2) !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5) !important;
+  backdrop-filter: blur(10px);
+}
+
+html.dark [class*="hover:bg-gray-100"]:hover {
+  background-color: rgba(100, 116, 139, 0.2) !important;
+  transition: background-color 0.2s ease;
+}
+
+/* Dark mode - Scrollbar */
+html.dark ::-webkit-scrollbar {
+  width: 8px;
+}
+
+html.dark ::-webkit-scrollbar-track {
+  background: rgba(148, 163, 184, 0.05);
+}
+
+html.dark ::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.2);
+  border-radius: 4px;
+}
+
+html.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(148, 163, 184, 0.4);
+}
+
+/* Dark mode - Ring colors */
+html.dark .ring-gray-200,
+html.dark .focus:ring-gray-200 {
+  --tw-ring-color: rgba(148, 163, 184, 0.2) !important;
+}
+
+html.dark .ring-primary {
+  --tw-ring-color: rgba(0, 82, 204, 0.3) !important;
+}
+
+/* Dark mode - Shadows */
+html.dark .shadow-lg,
+html.dark .shadow-xl,
+html.dark .shadow-2xl {
+  --tw-shadow-color: rgba(0, 0, 0, 0.5);
+  box-shadow: 0 20px 25px -5px var(--tw-shadow-color) !important;
+}
+
+/* Dark mode - Focus */
+html.dark *:focus-visible {
+  outline: 2px solid rgba(100, 200, 255, 0.5);
+  outline-offset: 2px;
+}
+
+/* Dark mode - Shimmer */
+html.dark .animate-shimmer {
+  animation: shimmer 2s infinite;
+  background: linear-gradient(
+    90deg,
+    rgba(148, 163, 184, 0.1) 0%,
+    rgba(148, 163, 184, 0.2) 50%,
+    rgba(148, 163, 184, 0.1) 100%
+  );
+  background-size: 1000px 100%;
+}
+
+/* Dark mode - Transitions */
+html.dark * {
+  transition-property: color, background-color, border-color, box-shadow;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+html.dark .no-transition {
+  transition: none !important;
+}
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+/* ========================================
+   UTILITY CLASSES
+   ======================================== */
 
 /* Gradient text */
 .gradient-text {
-  background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+  background: linear-gradient(
+    135deg,
+    var(--color-primary),
+    var(--color-accent)
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -72,9 +491,13 @@ body {
 
 /* Animated gradient button */
 .btn-gradient {
-  background: linear-gradient(135deg, var(--color-primary), var(--color-primary-light), var(--color-accent));
+  background: linear-gradient(
+    135deg,
+    var(--color-primary),
+    var(--color-primary-light),
+    var(--color-accent)
+  );
   background-size: 200% 200%;
-  animation: gradient 3s ease infinite;
   transition: all 0.3s ease;
 }
 
@@ -91,13 +514,6 @@ body {
 .card-hover:hover {
   transform: translateY(-4px);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-}
-
-/* Input focus styles */
-input:focus, textarea:focus, select:focus {
-  outline: none;
-  ring: 2px;
-  ring-color: var(--color-primary);
 }
 
 /* Checkbox styling */
@@ -136,5 +552,9 @@ input[type="number"]::-webkit-outer-spin-button {
 
 /* Timeline styles */
 .timeline-line {
-  background: linear-gradient(to bottom, var(--color-primary), var(--color-accent));
+  background: linear-gradient(
+    to bottom,
+    var(--color-primary),
+    var(--color-accent)
+  );
 }
