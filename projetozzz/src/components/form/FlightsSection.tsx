@@ -9,6 +9,7 @@ interface FlightsSectionProps {
   onChange: (data: TravelProposal["flights"]) => void;
 }
 
+// FlightForm moved outside
 const FlightForm: React.FC<{
   title: string;
   icon: React.ReactNode;
@@ -65,7 +66,6 @@ const FlightForm: React.FC<{
                   onChange({ ...flight, origin });
                 }
               }}
-              onCodeChange={(originCode) => onChange({ ...flight, originCode })}
               placeholder="São Paulo"
               className="flex-1 px-3 py-2 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-sm"
               showCode={true}
@@ -101,9 +101,6 @@ const FlightForm: React.FC<{
                   onChange({ ...flight, destination });
                 }
               }}
-              onCodeChange={(destinationCode) =>
-                onChange({ ...flight, destinationCode })
-              }
               placeholder="Miami"
               className="flex-1 px-3 py-2 rounded-lg border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-sm"
               showCode={true}
