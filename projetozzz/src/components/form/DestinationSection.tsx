@@ -1,15 +1,18 @@
-import React from 'react';
-import { MapPin, Calendar } from 'lucide-react';
-import { TravelProposal } from '../../types';
-import { ImageUpload } from '../ui/ImageUpload';
-import { LocationAutocomplete } from '../ui/LocationAutocomplete';
+import React from "react";
+import { MapPin, Calendar } from "lucide-react";
+import { TravelProposal } from "../../types";
+import { ImageUpload } from "../ui/ImageUpload";
+import { LocationAutocomplete } from "../ui/LocationAutocomplete";
 
 interface DestinationSectionProps {
-  data: TravelProposal['destination'];
-  onChange: (data: TravelProposal['destination']) => void;
+  data: TravelProposal["destination"];
+  onChange: (data: TravelProposal["destination"]) => void;
 }
 
-export const DestinationSection: React.FC<DestinationSectionProps> = ({ data, onChange }) => {
+export const DestinationSection: React.FC<DestinationSectionProps> = ({
+  data,
+  onChange,
+}) => {
   return (
     <div className="space-y-6">
       {/* Destination Name */}
@@ -60,7 +63,13 @@ export const DestinationSection: React.FC<DestinationSectionProps> = ({ data, on
         <div className="flex items-center gap-2 text-sm text-gray-500 bg-gray-50 px-4 py-2 rounded-lg">
           <span>📅</span>
           <span>
-            Duração: {Math.ceil((new Date(data.checkOut).getTime() - new Date(data.checkIn).getTime()) / (1000 * 60 * 60 * 24))} noites
+            Duração:{" "}
+            {Math.ceil(
+              (new Date(data.checkOut).getTime() -
+                new Date(data.checkIn).getTime()) /
+                (1000 * 60 * 60 * 24)
+            )}{" "}
+            noites
           </span>
         </div>
       )}
@@ -74,7 +83,7 @@ export const DestinationSection: React.FC<DestinationSectionProps> = ({ data, on
           Escolha uma foto impressionante que será o destaque da proposta
         </p>
         <ImageUpload
-          value={data.heroImage || ''}
+          value={data.heroImage || ""}
           onChange={(heroImage) => onChange({ ...data, heroImage })}
           aspectRatio="wide"
           placeholder="Arraste uma foto de alta qualidade do destino"

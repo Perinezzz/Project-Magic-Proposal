@@ -1,27 +1,45 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Globe, CloudSun, Languages, Coins, Sparkles, Plus, X, Image as ImageIcon, Wand2 } from 'lucide-react';
-import { TravelProposal } from '../../types';
-import { ImageUpload } from '../ui/ImageUpload';
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import {
+  Globe,
+  CloudSun,
+  Sparkles,
+  Plus,
+  X,
+  Image as ImageIcon,
+  Wand2,
+} from "lucide-react";
+import { TravelProposal } from "../../types";
+import { ImageUpload } from "../ui/ImageUpload";
 
 interface AboutSectionProps {
-  data: TravelProposal['about'];
-  onChange: (data: TravelProposal['about']) => void;
+  data: TravelProposal["about"];
+  onChange: (data: TravelProposal["about"]) => void;
   isLoadingAI?: boolean;
 }
 
-export const AboutSection: React.FC<AboutSectionProps> = ({ data, onChange, isLoadingAI = false }) => {
-  const [newHighlight, setNewHighlight] = useState('');
+export const AboutSection: React.FC<AboutSectionProps> = ({
+  data,
+  onChange,
+  isLoadingAI = false,
+}) => {
+  const [newHighlight, setNewHighlight] = useState("");
 
   const addHighlight = () => {
     if (newHighlight.trim()) {
-      onChange({ ...data, highlights: [...data.highlights, newHighlight.trim()] });
-      setNewHighlight('');
+      onChange({
+        ...data,
+        highlights: [...data.highlights, newHighlight.trim()],
+      });
+      setNewHighlight("");
     }
   };
 
   const removeHighlight = (index: number) => {
-    onChange({ ...data, highlights: data.highlights.filter((_, i) => i !== index) });
+    onChange({
+      ...data,
+      highlights: data.highlights.filter((_, i) => i !== index),
+    });
   };
 
   const handlePhotoChange = (index: number, value: string) => {
@@ -32,7 +50,7 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ data, onChange, isLo
 
   const addPhoto = () => {
     if (data.photos.length < 3) {
-      onChange({ ...data, photos: [...data.photos, ''] });
+      onChange({ ...data, photos: [...data.photos, ""] });
     }
   };
 
@@ -65,7 +83,11 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ data, onChange, isLo
             placeholder="Descreva a magia deste destino... O que torna este lugar especial? Quais experiências únicas aguardam?"
             rows={4}
             maxLength={500}
-            className={`w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all resize-none ${isLoadingAI ? 'bg-gradient-to-r from-purple-50 to-blue-50 animate-pulse' : ''}`}
+            className={`w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all resize-none ${
+              isLoadingAI
+                ? "bg-gradient-to-r from-purple-50 to-blue-50 animate-pulse"
+                : ""
+            }`}
             disabled={isLoadingAI}
           />
           {isLoadingAI && (
@@ -76,16 +98,26 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ data, onChange, isLo
             >
               <div className="flex items-center gap-2 px-4 py-2 bg-white rounded-lg shadow-lg border border-primary/20">
                 <Wand2 className="w-5 h-5 text-primary animate-spin" />
-                <span className="text-sm font-medium text-gray-700">Gerando com IA...</span>
+                <span className="text-sm font-medium text-gray-700">
+                  Gerando com IA...
+                </span>
               </div>
             </motion.div>
           )}
         </div>
         <div className="flex justify-between mt-1">
           <span className="text-xs text-gray-400">
-            {isLoadingAI ? '✨ A IA está escrevendo para você...' : 'Mínimo: 100 caracteres'}
+            {isLoadingAI
+              ? "✨ A IA está escrevendo para você..."
+              : "Mínimo: 100 caracteres"}
           </span>
-          <span className={`text-xs ${data.description.length < 100 ? 'text-orange-500' : 'text-gray-400'}`}>
+          <span
+            className={`text-xs ${
+              data.description.length < 100
+                ? "text-orange-500"
+                : "text-gray-400"
+            }`}
+          >
             {data.description.length}/500
           </span>
         </div>
@@ -118,32 +150,6 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ data, onChange, isLo
             className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
           />
         </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            <Languages className="inline-block w-4 h-4 mr-2" />
-            Idioma
-          </label>
-          <input
-            type="text"
-            value={data.language}
-            onChange={(e) => onChange({ ...data, language: e.target.value })}
-            placeholder="ex: Inglês, Francês"
-            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
-          />
-        </div>
-        <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            <Coins className="inline-block w-4 h-4 mr-2" />
-            Moeda
-          </label>
-          <input
-            type="text"
-            value={data.currency}
-            onChange={(e) => onChange({ ...data, currency: e.target.value })}
-            placeholder="ex: Euro (EUR)"
-            className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
-          />
-        </div>
       </div>
 
       {/* Highlights */}
@@ -157,7 +163,9 @@ export const AboutSection: React.FC<AboutSectionProps> = ({ data, onChange, isLo
             type="text"
             value={newHighlight}
             onChange={(e) => setNewHighlight(e.target.value)}
-            onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addHighlight())}
+            onKeyPress={(e) =>
+              e.key === "Enter" && (e.preventDefault(), addHighlight())
+            }
             placeholder="ex: 🏖️ Praias paradisíacas"
             className="flex-1 px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
           />

@@ -1,27 +1,33 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Hotel, Star, MapPin, Plus, X } from 'lucide-react';
-import { TravelProposal } from '../../types';
-import { ImageUpload } from '../ui/ImageUpload';
-import { LocationAutocomplete } from '../ui/LocationAutocomplete';
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Hotel, Star, MapPin, Plus, X } from "lucide-react";
+import { TravelProposal } from "../../types";
+import { ImageUpload } from "../ui/ImageUpload";
+import { LocationAutocomplete } from "../ui/LocationAutocomplete";
 
 interface AccommodationSectionProps {
-  data: TravelProposal['accommodation'];
-  onChange: (data: TravelProposal['accommodation']) => void;
+  data: TravelProposal["accommodation"];
+  onChange: (data: TravelProposal["accommodation"]) => void;
 }
 
-export const AccommodationSection: React.FC<AccommodationSectionProps> = ({ data, onChange }) => {
-  const [newAmenity, setNewAmenity] = useState('');
+export const AccommodationSection: React.FC<AccommodationSectionProps> = ({
+  data,
+  onChange,
+}) => {
+  const [newAmenity, setNewAmenity] = useState("");
 
   const addAmenity = () => {
     if (newAmenity.trim()) {
       onChange({ ...data, amenities: [...data.amenities, newAmenity.trim()] });
-      setNewAmenity('');
+      setNewAmenity("");
     }
   };
 
   const removeAmenity = (index: number) => {
-    onChange({ ...data, amenities: data.amenities.filter((_, i) => i !== index) });
+    onChange({
+      ...data,
+      amenities: data.amenities.filter((_, i) => i !== index),
+    });
   };
 
   const handlePhotoChange = (index: number, value: string) => {
@@ -92,11 +98,14 @@ export const AccommodationSection: React.FC<AccommodationSectionProps> = ({ data
                 onClick={() => onChange({ ...data, stars: star })}
                 className={`w-10 h-10 rounded-lg flex items-center justify-center transition-all ${
                   star <= data.stars
-                    ? 'bg-yellow-400 text-white'
-                    : 'bg-gray-100 text-gray-300 hover:bg-gray-200'
+                    ? "bg-yellow-400 text-white"
+                    : "bg-gray-100 text-gray-300 hover:bg-gray-200"
                 }`}
               >
-                <Star size={20} fill={star <= data.stars ? 'currentColor' : 'none'} />
+                <Star
+                  size={20}
+                  fill={star <= data.stars ? "currentColor" : "none"}
+                />
               </motion.button>
             ))}
           </div>
@@ -112,10 +121,14 @@ export const AccommodationSection: React.FC<AccommodationSectionProps> = ({ data
               max="10"
               step="0.1"
               value={data.rating}
-              onChange={(e) => onChange({ ...data, rating: parseFloat(e.target.value) })}
+              onChange={(e) =>
+                onChange({ ...data, rating: parseFloat(e.target.value) })
+              }
               className="flex-1 h-2 rounded-lg appearance-none bg-gray-200 cursor-pointer accent-primary"
             />
-            <span className="w-12 text-center font-bold text-lg text-primary">{data.rating.toFixed(1)}</span>
+            <span className="w-12 text-center font-bold text-lg text-primary">
+              {data.rating.toFixed(1)}
+            </span>
           </div>
         </div>
       </div>
@@ -144,7 +157,9 @@ export const AccommodationSection: React.FC<AccommodationSectionProps> = ({ data
             type="text"
             value={newAmenity}
             onChange={(e) => setNewAmenity(e.target.value)}
-            onKeyPress={(e) => e.key === 'Enter' && (e.preventDefault(), addAmenity())}
+            onKeyPress={(e) =>
+              e.key === "Enter" && (e.preventDefault(), addAmenity())
+            }
             placeholder="ex: 🏊 Piscina Infinita, 🍽️ Restaurante..."
             className="flex-1 px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
           />
@@ -189,7 +204,7 @@ export const AccommodationSection: React.FC<AccommodationSectionProps> = ({ data
           {[0, 1].map((index) => (
             <ImageUpload
               key={index}
-              value={data.photos[index] || ''}
+              value={data.photos[index] || ""}
               onChange={(value) => handlePhotoChange(index, value)}
               aspectRatio="video"
               placeholder={`Foto ${index + 1} do hotel`}
