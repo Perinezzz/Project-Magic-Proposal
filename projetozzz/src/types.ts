@@ -144,6 +144,7 @@ export interface TravelProposal {
         name: string;
         checkIn: string;
         checkOut: string;
+        code?: string;
         heroImage?: string;
     };
 
@@ -193,6 +194,7 @@ export const createEmptyProposal = (): Omit<TravelProposal, 'id' | 'createdAt'> 
         name: '',
         checkIn: '',
         checkOut: '',
+        code: '',
         heroImage: '',
     },
     about: {

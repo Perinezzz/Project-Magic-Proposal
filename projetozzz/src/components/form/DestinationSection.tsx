@@ -23,7 +23,7 @@ export const DestinationSection: React.FC<DestinationSectionProps> = ({
         </label>
         <LocationAutocomplete
           value={data.name}
-          onChange={(name) => onChange({ ...data, name })}
+          onChange={(name, code) => onChange({ ...data, name, code })}
           placeholder="ex: Maldivas, Paris, Fernando de Noronha..."
           className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all text-lg"
           type="all"

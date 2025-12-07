@@ -128,6 +128,29 @@ export const FormPage: React.FC = () => {
     }
   }, [formData.destination.name]);
 
+  // Auto-fill flights based on destination
+  useEffect(() => {
+    if (formData.destination.name) {
+      setFormData((prev) => ({
+        ...prev,
+        flights: {
+          ...prev.flights,
+          outbound: {
+            ...prev.flights.outbound,
+            destination: prev.destination.name,
+            destinationCode:
+              prev.destination.code || prev.flights.outbound.destinationCode,
+          },
+          return: {
+            ...prev.flights.return,
+            origin: prev.destination.name,
+            originCode: prev.destination.code || prev.flights.return.originCode,
+          },
+        },
+      }));
+    }
+  }, [formData.destination.name, formData.destination.code]);
+
   // Apply initial theme
   useEffect(() => {
     applyTheme(formData.agency.theme);
